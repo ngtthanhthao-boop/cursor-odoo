@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Call Log Tree View -->
+    <record id="view_call_log_tree" model="ir.ui.view">
+        <field name="name">staff.manager.call.log.tree</field>
+        <field name="model">staff.manager.call.log</field>
+        <field name="arch" type="xml">
+            <list string="Lịch Sử Cuộc Gọi" decoration-success="status == 'answered'" decoration-danger="status == 'unanswered'">
+                <field name="call_time"/>
+                <field name="staff_id"/>
+                <field name="employee_code"/>
+                <field name="phone"/>
+                <field name="department"/>
+                <field name="area"/>
+                <field name="status"/>
+                <field name="duration"/>
+                <field name="response_key"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- Call Log Form View -->
+    <record id="view_call_log_form" model="ir.ui.view">
+        <field name="name">staff.manager.call.log.form</field>
+        <field name="model">staff.manager.call.log</field>
+        <field name="arch" type="xml">
+            <form string="Lịch Sử Cuộc Gọi">
+                <sheet>
+                    <group>
+                        <group name="call_info" string="Thông tin cuộc gọi">
+                            <field name="call_time"/>
+                            <field name="staff_id"/>
+                            <field name="status"/>
+                            <field name="duration" invisible="status == 'unanswered'"/>
+                            <field name="response_key"/>
+                        </group>
+                        <group name="staff_info" string="Thông tin nhân viên">
+                            <field name="employee_code"/>
+                            <field name="phone"/>
+                            <field name="department"/>
+                            <field name="area"/>
+                        </group>
+                    </group>
+                    <group name="recording" string="Ghi âm">
+                        <field name="record_url" widget="url"/>
+                    </group>
+                    <group name="notes" string="Ghi chú">
+                        <field name="notes" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Call Log Search View -->
+    <record id="view_call_log_search" model="ir.ui.view">
+        <field name="name">staff.manager.call.log.search</field>
+        <field name="model">staff.manager.call.log</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm cuộc gọi">
+                <field name="staff_id"/>
+                <field name="employee_code"/>
+                <field name="phone"/>
+                <field name="department"/>
+                <field name="area"/>
+                <filter string="Đã trả lời" name="answered" domain="[('status', '=', 'answered')]"/>
+                <filter string="Chưa trả lời" name="unanswered" domain="[('status', '=', 'unanswered')]"/>
+                <separator/>
+                <filter string="Hôm nay" name="today" domain="[('call_time', '&gt;=', context_today().strftime('%Y-%m-%d'))]"/>
+                <filter string="7 ngày qua" name="last_7_days" domain="[('call_time', '&gt;=', (context_today()-datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+                <filter string="30 ngày qua" name="last_30_days" domain="[('call_time', '&gt;=', (context_today()-datetime.timedelta(days=30)).strftime('%Y-%m-%d'))]"/>
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Nhân viên" name="group_staff" context="{'group_by': 'staff_id'}"/>
+                    <filter string="Trạng thái" name="group_status" context="{'group_by': 'status'}"/>
+                    <filter string="Phòng ban" name="group_department" context="{'group_by': 'department'}"/>
+                    <filter string="Khu vực" name="group_area" context="{'group_by': 'area'}"/>
+                    <filter string="Thời gian gọi" name="group_call_time" context="{'group_by': 'call_time:day'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Call Log Pivot View -->
+    <record id="view_call_log_pivot" model="ir.ui.view">
+        <field name="name">staff.manager.call.log.pivot</field>
+        <field name="model">staff.manager.call.log</field>
+        <field name="arch" type="xml">
+            <pivot string="Thống kê cuộc gọi">
+                <field name="department" type="row"/>
+                <field name="status" type="col"/>
+                <field name="duration" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Call Log Graph View -->
+    <record id="view_call_log_graph" model="ir.ui.view">
+        <field name="name">staff.manager.call.log.graph</field>
+        <field name="model">staff.manager.call.log</field>
+        <field name="arch" type="xml">
+            <graph string="Biểu đồ cuộc gọi" type="bar">
+                <field name="status" type="row"/>
+                <field name="duration" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- Call Log Action -->
+    <record id="action_call_log" model="ir.actions.act_window">
+        <field name="name">Lịch sử cuộc gọi</field>
+        <field name="res_model">staff.manager.call.log</field>
+        <field name="view_mode">list,form,pivot,graph</field>
+        <field name="search_view_id" ref="view_call_log_search"/>
+        <field name="context">{'search_default_last_30_days': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Chưa có lịch sử cuộc gọi
+            </p>
+            <p>
+                Lịch sử cuộc gọi sẽ được tự động ghi nhận khi có cuộc gọi được thực hiện.
+            </p>
+        </field>
+    </record>
+</odoo>
+

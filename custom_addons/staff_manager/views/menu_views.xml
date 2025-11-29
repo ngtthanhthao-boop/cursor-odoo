@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem id="menu_staff_manager_root"
+              name="Staff Manager"
+              sequence="10"
+              web_icon="staff_manager,static/description/icon.png"/>
+
+    <!-- Staff Submenu -->
+    <menuitem id="menu_staff_manager_staff"
+              name="Nhân viên"
+              parent="menu_staff_manager_root"
+              action="action_staff"
+              sequence="10"/>
+
+    <!-- Call Log Submenu -->
+    <menuitem id="menu_staff_manager_call_log"
+              name="Lịch sử cuộc gọi"
+              parent="menu_staff_manager_root"
+              action="action_call_log"
+              sequence="20"/>
+
+    <!-- System Status Submenu -->
+    <menuitem id="menu_staff_manager_system_status"
+              name="Trạng thái hệ thống"
+              parent="menu_staff_manager_root"
+              action="action_system_status"
+              sequence="30"/>
+
+    <!-- Configuration Menu -->
+    <menuitem id="menu_staff_manager_config"
+              name="Cấu hình"
+              parent="menu_staff_manager_root"
+              sequence="100"/>
+
+    <!-- Import Wizard Submenu -->
+    <menuitem id="menu_staff_manager_import"
+              name="Import nhân viên"
+              parent="menu_staff_manager_config"
+              action="action_import_wizard"
+              sequence="10"/>
+</odoo>
+

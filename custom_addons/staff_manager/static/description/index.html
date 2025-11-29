@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Staff Manager</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .header {
+            text-align: center;
+            padding: 30px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+        .section {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .section h2 {
+            color: #667eea;
+            margin-top: 0;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        .feature {
+            margin: 15px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        .feature:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .screenshot {
+            width: 100%;
+            border-radius: 5px;
+            margin: 15px 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        li {
+            padding: 8px 0;
+            padding-left: 30px;
+            position: relative;
+        }
+        li:before {
+            content: "•";
+            position: absolute;
+            left: 10px;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background-color: #667eea;
+            color: white;
+            border-radius: 20px;
+            font-size: 0.9em;
+            margin: 5px;
+        }
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📞 Staff Manager</h1>
+        <p>Giải pháp quản lý nhân viên và cuộc gọi chuyên nghiệp</p>
+        <div>
+            <span class="badge">Odoo 18.0</span>
+            <span class="badge">v1.1.0</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🎯 Tổng quan</h2>
+        <p>
+            <strong>Staff Manager</strong> là module quản lý toàn diện cho việc theo dõi nhân viên 
+            và lịch sử cuộc gọi. Module cung cấp giao diện trực quan, dễ sử dụng với đầy đủ tính năng 
+            từ quản lý thông tin cơ bản đến thống kê chi tiết.
+        </p>
+    </div>
+
+    <div class="section">
+        <h2>✨ Tính năng nổi bật</h2>
+        
+        <div class="feature">
+            <strong>Quản lý Nhân viên</strong>
+            <ul>
+                <li>Lưu trữ đầy đủ thông tin: mã NV, họ tên, SĐT, phòng ban, khu vực</li>
+                <li>Validate tự động số điện thoại theo chuẩn Việt Nam</li>
+                <li>Thống kê cuộc gọi theo thời gian thực</li>
+                <li>Tìm kiếm và lọc nhanh chóng</li>
+            </ul>
+        </div>
+
+        <div class="feature">
+            <strong>Lịch sử Cuộc gọi</strong>
+            <ul>
+                <li>Ghi nhận chi tiết từng cuộc gọi</li>
+                <li>Trạng thái: Đã trả lời / Chưa trả lời</li>
+                <li>Lưu file ghi âm và phím phản hồi</li>
+                <li>Thống kê đa chiều với Pivot & Graph</li>
+            </ul>
+        </div>
+
+        <div class="feature">
+            <strong>Import Excel</strong>
+            <ul>
+                <li>Import hàng loạt từ file Excel</li>
+                <li>Tự động validate và báo lỗi chi tiết</li>
+                <li>Hỗ trợ cập nhật hoặc tạo mới</li>
+                <li>Tải file mẫu tiện lợi</li>
+            </ul>
+        </div>
+
+        <div class="feature">
+            <strong>Quản lý Hệ thống</strong>
+            <ul>
+                <li>Bật/tắt hệ thống dễ dàng</li>
+                <li>Cấu hình số cuộc gọi tối đa</li>
+                <li>Quản lý file nội dung</li>
+                <li>Theo dõi lịch sử thay đổi</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>🚀 Cài đặt</h2>
+        <ol>
+            <li>Cài đặt dependencies: <code>pip install xlrd xlsxwriter</code></li>
+            <li>Copy module vào thư mục custom_addons</li>
+            <li>Cập nhật danh sách apps trong Odoo</li>
+            <li>Tìm và cài đặt "Staff Manager"</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>📋 Yêu cầu</h2>
+        <ul>
+            <li>Odoo 18.0</li>
+            <li>Python 3.8+</li>
+            <li>xlrd (đọc file Excel)</li>
+            <li>xlsxwriter (tạo file Excel)</li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>🎓 Hướng dẫn nhanh</h2>
+        <p><strong>Import nhân viên:</strong></p>
+        <ol>
+            <li>Menu: Staff Manager → Cấu hình → Import nhân viên</li>
+            <li>Tải file mẫu hoặc chuẩn bị file Excel</li>
+            <li>Chọn file và các tùy chọn</li>
+            <li>Nhấn Import và xem kết quả</li>
+        </ol>
+
+        <p><strong>Xem thống kê cuộc gọi:</strong></p>
+        <ol>
+            <li>Menu: Staff Manager → Lịch sử cuộc gọi</li>
+            <li>Chọn filter: Hôm nay / 7 ngày / 30 ngày</li>
+            <li>Chuyển sang Pivot hoặc Graph view</li>
+            <li>Phân tích dữ liệu theo nhu cầu</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>📞 Hỗ trợ</h2>
+        <p>Để được hỗ trợ hoặc báo lỗi, vui lòng liên hệ:</p>
+        <ul>
+            <li>Email: support@yourcompany.com</li>
+            <li>Website: https://www.yourcompany.com</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p>© 2024 Your Company. All rights reserved.</p>
+        <p>Staff Manager v18.0.1.1.0 | License: LGPL-3</p>
+    </div>
+</body>
+</html>
+

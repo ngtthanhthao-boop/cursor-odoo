@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- System Status Tree View -->
+    <record id="view_system_status_tree" model="ir.ui.view">
+        <field name="name">staff.manager.system.status.tree</field>
+        <field name="model">staff.manager.system.status</field>
+        <field name="arch" type="xml">
+            <list string="Trạng Thái Hệ Thống" decoration-success="status == 'on'" decoration-muted="status == 'off'">
+                <field name="name"/>
+                <field name="status"/>
+                <field name="max_calls"/>
+                <field name="last_update"/>
+                <field name="updated_by"/>
+                <field name="active" column_invisible="1"/>
+            </list>
+        </field>
+    </record>
+
+    <!-- System Status Form View -->
+    <record id="view_system_status_form" model="ir.ui.view">
+        <field name="name">staff.manager.system.status.form</field>
+        <field name="model">staff.manager.system.status</field>
+        <field name="arch" type="xml">
+            <form string="Trạng Thái Hệ Thống">
+                <header>
+                    <button name="action_turn_on" string="Bật hệ thống" type="object" 
+                            class="oe_highlight" invisible="status == 'on'"/>
+                    <button name="action_turn_off" string="Tắt hệ thống" type="object" 
+                            class="btn-danger" invisible="status == 'off'"/>
+                    <field name="status" widget="statusbar" statusbar_visible="off,on"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <group>
+                        <group name="config_info" string="Thông tin cấu hình">
+                            <field name="name"/>
+                            <field name="max_calls"/>
+                        </group>
+                        <group name="update_info" string="Thông tin cập nhật">
+                            <field name="last_update" readonly="1"/>
+                            <field name="updated_by" readonly="1"/>
+                        </group>
+                    </group>
+                    <group name="content" string="Nội dung file">
+                        <field name="content_file" nolabel="1" widget="text"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- System Status Search View -->
+    <record id="view_system_status_search" model="ir.ui.view">
+        <field name="name">staff.manager.system.status.search</field>
+        <field name="model">staff.manager.system.status</field>
+        <field name="arch" type="xml">
+            <search string="Tìm kiếm cấu hình">
+                <field name="name"/>
+                <filter string="Đang bật" name="status_on" domain="[('status', '=', 'on')]"/>
+                <filter string="Đang tắt" name="status_off" domain="[('status', '=', 'off')]"/>
+                <separator/>
+                <filter string="Hoạt động" name="active" domain="[('active', '=', True)]"/>
+                <filter string="Đã lưu trữ" name="inactive" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Trạng thái" name="group_status" context="{'group_by': 'status'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- System Status Action -->
+    <record id="action_system_status" model="ir.actions.act_window">
+        <field name="name">Trạng thái hệ thống</field>
+        <field name="res_model">staff.manager.system.status</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_system_status_search"/>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Tạo cấu hình hệ thống
+            </p>
+            <p>
+                Bấm vào nút Tạo để thêm cấu hình mới cho hệ thống.
+            </p>
+        </field>
+    </record>
+</odoo>
+

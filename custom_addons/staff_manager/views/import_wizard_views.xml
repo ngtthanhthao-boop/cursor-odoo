@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Import Wizard Form View -->
+    <record id="view_import_wizard_form" model="ir.ui.view">
+        <field name="name">staff.manager.import.wizard.form</field>
+        <field name="model">staff.manager.import.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Import Nhân Viên từ Excel">
+                <group>
+                    <group name="file_info" string="File Excel">
+                        <field name="file_data" filename="filename"/>
+                        <field name="filename" invisible="1"/>
+                    </group>
+                    <group name="options" string="Tùy chọn">
+                        <field name="update_existing"/>
+                        <field name="skip_validation"/>
+                    </group>
+                </group>
+                <group name="instructions" string="Hướng dẫn">
+                    <div class="alert alert-info" role="alert">
+                        <strong>Cấu trúc file Excel:</strong>
+                        <ul>
+                            <li>Dòng 1: Header (Mã nhân viên, Họ tên đầy đủ, Số điện thoại, Phòng ban, Khu vực)</li>
+                            <li>Từ dòng 2: Dữ liệu nhân viên</li>
+                            <li>Số điện thoại: Định dạng 0xxxxxxxxx (10-11 số)</li>
+                        </ul>
+                        <p>
+                            <strong>Lưu ý:</strong>
+                            <ul>
+                                <li>Mã nhân viên, Họ tên, Phòng ban, Khu vực là bắt buộc</li>
+                                <li>Nếu "Cập nhật bản ghi có sẵn" được chọn: Sẽ cập nhật nhân viên trùng mã</li>
+                                <li>Nếu "Bỏ qua validate số điện thoại" được chọn: Không kiểm tra định dạng SĐT</li>
+                            </ul>
+                        </p>
+                    </div>
+                </group>
+                <group name="result" string="Kết quả" invisible="not import_log">
+                    <field name="import_log" nolabel="1" widget="text" readonly="1"/>
+                </group>
+                <footer>
+                    <button name="action_import_excel" string="Import" type="object" class="oe_highlight"/>
+                    <button name="action_download_template" string="Tải file mẫu" type="object" class="btn-secondary"/>
+                    <button string="Đóng" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Import Wizard Action -->
+    <record id="action_import_wizard" model="ir.actions.act_window">
+        <field name="name">Import nhân viên</field>
+        <field name="res_model">staff.manager.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_staff_manager_staff"/>
+        <field name="binding_view_types">list</field>
+    </record>
+</odoo>
+

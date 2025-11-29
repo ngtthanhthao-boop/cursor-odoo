@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_staff_manager_staff_user,staff.manager.staff.user,model_staff_manager_staff,base.group_user,1,1,1,1
+access_staff_manager_call_log_user,staff.manager.call.log.user,model_staff_manager_call_log,base.group_user,1,1,1,1
+access_staff_manager_system_status_user,staff.manager.system.status.user,model_staff_manager_system_status,base.group_user,1,1,1,0
+access_staff_manager_system_status_manager,staff.manager.system.status.manager,model_staff_manager_system_status,base.group_system,1,1,1,1
+access_staff_manager_import_wizard_user,staff.manager.import.wizard.user,model_staff_manager_import_wizard,base.group_user,1,1,1,1
+
